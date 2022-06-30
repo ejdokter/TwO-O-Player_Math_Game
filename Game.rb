@@ -11,6 +11,10 @@ class Game
     @game_over = false
   end
 
+  def score_board
+    puts "----SCORE----"
+    puts "#{@player1.name}: #{@player1.lives}/3 vs #{@player2.name}: #{@player2.lives}/3"
+  end
   # @game_over = false
   # @player1 = Player.new("player 1")
   # @player2 = Player.new("player 2")
@@ -38,9 +42,9 @@ class Game
       @q = Question.new
 
 
-      puts @player1.lives
-      puts @player2.lives
-      puts turn
+      # puts @player1.lives
+      # puts @player2.lives
+      # puts turn
       
       if turn == "p1"
         print "#{@player1.name}: #{@q.question}"
@@ -48,21 +52,26 @@ class Game
         print "#{@player2.name}: #{@q.question}"
       end
       # print @q.question
-      user_input = gets.chomp
-      if turn == "p1" && @q.is_correct?(user_input.to_i)
+      user_input = gets.chomp.to_i
+      # puts user_input.class
+      if turn == "p1" && @q.is_correct?(user_input)
         @player1.right_answer
+        puts score_board
         turn = "p2"
         
-      elsif turn == "p1" && !@q.is_correct?(user_input.to_i)
+      elsif turn == "p1" && !@q.is_correct?(user_input)
         @player1.wrong_answer
+        puts score_board
         turn = "p2"
         
-      elsif turn == "p2" && @q.is_correct?(user_input.to_i)
+      elsif turn == "p2" && @q.is_correct?(user_input)
         @player2.right_answer
+        puts score_board
         turn = "p1"
         
-      elsif turn == "p2" && !@q.is_correct?(user_input.to_i)
+      elsif turn == "p2" && !@q.is_correct?(user_input)
         @player2.wrong_answer
+        puts score_board
         turn = "p1"
         
       end
@@ -72,7 +81,6 @@ class Game
 
 end
 
-
-# case question1.question
-#   when 
-# end
+# a = gets.chomp.to_i
+# puts "#{a}"
+# puts "#{a.class}"
